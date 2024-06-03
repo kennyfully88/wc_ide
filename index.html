@@ -312,6 +312,14 @@
 
   const webPreviewArea = document.querySelector('.web_preview_area');
 
+  codingArea.addEventListener('mousedown', () => {
+    codingArea.style.transition = 'none';
+  });
+
+  codingArea.addEventListener('mouseup', () => {
+    codingArea.style.transition = 'all 250ms ease-in-out';
+  });
+
   codingAreaTabAreaTabs.forEach((tab) => {
     tab.addEventListener('click', (e) => {
       codingAreaTabAreaTabs.forEach((tab) => {
