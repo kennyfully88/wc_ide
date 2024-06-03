@@ -225,11 +225,11 @@
         </div>
       </div>
 
-      <object
+      <iframe
         class="web_preview_area"
-        data="data:text/html;base64,PCFET0NUWVBFIGh0bWw+CjxodG1sPgogIDxoZWFkPiA8L2hlYWQ+CiAgPGJvZHk+PC9ib2R5Pgo8L2h0bWw+Cg=="
+        src="data:text/html;base64,PCFET0NUWVBFIGh0bWw+CjxodG1sPgogIDxoZWFkPiA8L2hlYWQ+CiAgPGJvZHk+PC9ib2R5Pgo8L2h0bWw+Cg=="
         type="text/html"
-      ></object>
+      ></iframe>
     </main>
 
     <footer class="app_footer">2024 FURU CODE</footer>
@@ -251,7 +251,7 @@
 
   const expandButton = document.querySelector('.expand_button');
 
-  const rereshButton = document.querySelector('.refresh_button');
+  const refreshButton = document.querySelector('.refresh_button');
 
   const webPreviewArea = document.querySelector('.web_preview_area');
 
@@ -324,7 +324,7 @@
     }
   });
 
-  rereshButton.addEventListener('click', (e) => {
+  refreshButton.addEventListener('click', async (e) => {
     const webViewString = `
           <!DOCTYPE html>
           <html>
@@ -344,15 +344,9 @@
               <\/script>
           </html>`;
 
-    const bytesToBase64 = (bytes) => {
-      const binString = Array.from(bytes, (byte) =>
-        String.fromCodePoint(byte)
-      ).join('');
-      return btoa(binString);
-    };
+    const blob = new Blob([webViewString], { type: 'text/html' });
+    const blobUrl = URL.createObjectURL(blob);
 
-    let dataUri = bytesToBase64(new TextEncoder().encode(webViewString));
-
-    webPreviewArea.setAttribute('data', 'data:text/html;base64,' + dataUri);
+    webPreviewArea.setAttribute('src', blobUrl);
   });
 </script>
