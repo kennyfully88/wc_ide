@@ -32,7 +32,7 @@ English 日本語
 
 ## Instructions
 
-**The current IDE filesize is about 11kb and in 1 HTML file.**
+**The current IDE filesize is about 13kb and in 1 HTML file.**
 **This can be used without a server! Just Open it up in your browser!**
 
 1. Write HTML, CSS, and JavaScript
@@ -47,7 +47,7 @@ English 日本語
 
 ## 説明書
 
-**現在の IDE ファイルサイズは約 11kb で、1 つの HTML のファイルです。**
+**現在の IDE ファイルサイズは約 13kb で、1 つの HTML のファイルです。**
 **サーバーなしで使用できます！ ブラウザで開くだけです！**
 
 1）HTML、CSS、avaScript を書きます。
