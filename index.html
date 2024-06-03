@@ -121,7 +121,7 @@
         background-color: hsl(228, 100%, 50%);
         bottom: 16px;
         cursor: pointer;
-        display: flex;
+        display: none;
         fill: hsl(0, 0%, 100%);
         height: 48px;
         justify-content: center;
@@ -129,6 +129,10 @@
         position: absolute;
         right: 72px;
         width: 48px;
+      }
+
+      .expand_button.active {
+        display: flex;
       }
 
       .expand_button:hover {
@@ -159,6 +163,33 @@
       }
 
       .refresh_button:active {
+        transform: scale(0.8);
+      }
+
+      .shrink_button {
+        align-items: center;
+        background-color: hsl(228, 100%, 50%);
+        bottom: 16px;
+        cursor: pointer;
+        display: none;
+        fill: hsl(0, 0%, 100%);
+        height: 48px;
+        justify-content: center;
+        padding: 8px;
+        position: absolute;
+        right: 72px;
+        width: 48px;
+      }
+
+      .shrink_button.active {
+        display: flex;
+      }
+
+      .shrink_button:hover {
+        transform: scale(0.9);
+      }
+
+      .shrink_button:active {
         transform: scale(0.8);
       }
 
@@ -212,7 +243,19 @@
           </svg>
         </div>
 
-        <div class="expand_button">
+        <div class="shrink_button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            height="100%"
+          >
+            <path
+              d="M456 224H312c-13.3 0-24-10.7-24-24V56c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2l40 40L442.3 5.7C446 2 450.9 0 456 0s10 2 13.7 5.7l36.7 36.7C510 46 512 50.9 512 56s-2 10-5.7 13.7L433 143l40 40c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8zm0 64c9.7 0 18.5 5.8 22.2 14.8s1.7 19.3-5.2 26.2l-40 40 73.4 73.4c3.6 3.6 5.7 8.5 5.7 13.7s-2 10-5.7 13.7l-36.7 36.7C466 510 461.1 512 456 512s-10-2-13.7-5.7L369 433l-40 40c-6.9 6.9-17.2 8.9-26.2 5.2s-14.8-12.5-14.8-22.2V312c0-13.3 10.7-24 24-24H456zm-256 0c13.3 0 24 10.7 24 24V456c0 9.7-5.8 18.5-14.8 22.2s-19.3 1.7-26.2-5.2l-40-40L69.7 506.3C66 510 61.1 512 56 512s-10-2-13.7-5.7L5.7 469.7C2 466 0 461.1 0 456s2-10 5.7-13.7L79 369 39 329c-6.9-6.9-8.9-17.2-5.2-26.2s12.5-14.8 22.2-14.8H200zM56 224c-9.7 0-18.5-5.8-22.2-14.8s-1.7-19.3 5.2-26.2l40-40L5.7 69.7C2 66 0 61.1 0 56s2-10 5.7-13.7L42.3 5.7C46 2 50.9 0 56 0s10 2 13.7 5.7L143 79l40-40c6.9-6.9 17.2-8.9 26.2-5.2s14.8 12.5 14.8 22.2V200c0 13.3-10.7 24-24 24H56z"
+            />
+          </svg>
+        </div>
+
+        <div class="expand_button active">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
@@ -260,6 +303,8 @@
   );
 
   const downloadButton = document.querySelector('.download_button');
+
+  const shrinkButton = document.querySelector('.shrink_button');
 
   const expandButton = document.querySelector('.expand_button');
 
@@ -326,14 +371,18 @@
     URL.revokeObjectURL(blobUrl);
   });
 
+  shrinkButton.addEventListener('click', (e) => {
+    codingArea.style.width = '600px';
+    webPreviewArea.classList.remove('hidden');
+    shrinkButton.classList.remove('active');
+    expandButton.classList.add('active');
+  });
+
   expandButton.addEventListener('click', (e) => {
-    if (webPreviewArea.classList.contains('hidden')) {
-      webPreviewArea.classList.remove('hidden');
-      codingArea.style.width = '600px';
-    } else {
-      webPreviewArea.classList.add('hidden');
-      codingArea.style.width = '100%';
-    }
+    codingArea.style.width = '100%';
+    webPreviewArea.classList.add('hidden');
+    expandButton.classList.remove('active');
+    shrinkButton.classList.add('active');
   });
 
   refreshButton.addEventListener('click', async (e) => {
